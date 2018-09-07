@@ -1,0 +1,34 @@
+{
+    "Product": [
+      {
+        "barcode": "1234561",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      },
+      {
+        "barcode": "1234562",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      },
+      {
+        "barcode": "1234563",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      },
+      {
+        "barcode": "1234564",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      },
+      {
+        "barcode": "1234565",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      },
+      {
+        "barcode": "1234567",
+        "name": "ToothPath",
+        "numberofitems": "1"
+      }
+    ]
+  }
