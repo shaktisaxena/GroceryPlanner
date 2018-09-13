@@ -1,4 +1,4 @@
-package com.de.hibernate.businessobject;
+package com.de.groceryplanner.dto;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PRODUCT")
-public class Product implements Serializable {
+public class ProductDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,9 +24,9 @@ public class Product implements Serializable {
 
 	private int numberOfItems;
 
-	private Store storeName;
+	private StoreDto storeName;
 
-	private Category productCategory;
+	private CategoryDto productCategory;
 	
 	
 	
@@ -38,7 +38,7 @@ public class Product implements Serializable {
 	 * @param storeName
 	 * @param productCategory
 	 */
-	public Product(String name, String barCode, int numberOfItems, Store storeName, Category productCategory) {
+	public ProductDto(String name, String barCode, int numberOfItems, StoreDto storeName, CategoryDto productCategory) {
 		this.name = name;
 		this.barCode = barCode;
 		this.numberOfItems = numberOfItems;
@@ -95,14 +95,14 @@ public class Product implements Serializable {
 	 * @return the storeName
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
-	public Store getStoreName() {
+	public StoreDto getStoreName() {
 		return storeName;
 	}
 
 	/**
 	 * @param storeName the storeName to set
 	 */
-	public void setStoreName(Store storeName) {
+	public void setStoreName(StoreDto storeName) {
 		this.storeName = storeName;
 	}
 
@@ -110,14 +110,14 @@ public class Product implements Serializable {
 	 * @return the productCategory
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
-	public Category getProductCategory() {
+	public CategoryDto getProductCategory() {
 		return productCategory;
 	}
 
 	/**
 	 * @param productCategory the productCategory to set
 	 */
-	public void setProductCategory(Category productCategory) {
+	public void setProductCategory(CategoryDto productCategory) {
 		this.productCategory = productCategory;
 	}
 

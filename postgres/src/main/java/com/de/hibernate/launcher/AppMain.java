@@ -6,14 +6,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.de.hibernate.businessobject.Category;
-import com.de.hibernate.businessobject.Product;
-import com.de.hibernate.businessobject.Store;
-import com.de.hibernate.businessobject.StoreType;
+import com.de.groceryplanner.dto.CategoryDto;
+import com.de.groceryplanner.dto.ProductDto;
+import com.de.groceryplanner.dto.StoreDto;
+import com.de.groceryplanner.dto.StoreType;
 
 public class AppMain {
 
-	static Product productObject;
+	static ProductDto productObject;
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
 
@@ -49,8 +49,8 @@ public class AppMain {
 			                    .buildSessionFactory();
 						sessionObj = sessionFactoryObj.openSession();
 				
-				Store store = new Store("EDEKA",StoreType.ONLINE,"https://www");
-				productObject = new Product("Toothpaste","123455",4,store, new Category("Daily"));
+				StoreDto store = new StoreDto("EDEKA",StoreType.ONLINE,"https://www");
+				productObject = new ProductDto("Toothpaste","123455",4,store, new CategoryDto("Daily"));
 				
 				sessionObj.beginTransaction();
 				sessionObj.saveOrUpdate(productObject);

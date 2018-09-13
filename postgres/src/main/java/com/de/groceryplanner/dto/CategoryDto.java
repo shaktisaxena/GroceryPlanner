@@ -1,4 +1,4 @@
-package com.de.hibernate.businessobject;
+package com.de.groceryplanner.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CATEGORY")
-public class Category {
+public class CategoryDto {
 	
 	private String name;
 	
@@ -21,7 +21,7 @@ public class Category {
 	/**
 	 * @param name
 	 */
-	public Category(String name) {
+	public CategoryDto(String name) {
 		super();
 		this.name = name;
 	}

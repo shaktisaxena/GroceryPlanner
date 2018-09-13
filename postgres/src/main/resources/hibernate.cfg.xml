@@ -10,7 +10,7 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">sks4kor</property>
+        <property name="hibernate.connection.password"></property>
  
  
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
@@ -25,9 +25,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
  
         <!-- Annotated entity classes -->
-        <mapping class="com.de.hibernate.businessobject.Product"/>
-        <mapping class="com.de.hibernate.businessobject.Store"/>
-        <mapping class="com.de.hibernate.businessobject.Category"/>
+        <mapping class="com.de.groceryplanner.businessobject.Product"/>
+        <mapping class="com.de.groceryplanner.businessobject.Store"/>
+        <mapping class="com.de.groceryplanner.businessobject.Category"/>
         
     </session-factory>
 </hibernate-configuration>

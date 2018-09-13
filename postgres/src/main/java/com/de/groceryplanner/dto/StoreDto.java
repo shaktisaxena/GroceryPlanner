@@ -1,4 +1,4 @@
-package com.de.hibernate.businessobject;
+package com.de.groceryplanner.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="STORE")
-public class Store {
-	
+@Table(name = "STORE")
+public class StoreDto {
+
 	private String name;
-	
+
 	private StoreType storetype;
-	
+
 	private String storeLink;
-	
+
 	private int storeId;
-		
 
 	/**
 	 * @param name
@@ -27,17 +26,17 @@ public class Store {
 	 * @param storeLink
 	 * @param id
 	 */
-	public Store(String name, StoreType storetype, String storeLink) {
+	public StoreDto(String name, StoreType storetype, String storeLink) {
 		this.name = name;
 		this.storetype = storetype;
 		this.storeLink = storeLink;
-		
+
 	}
 
 	/**
 	 * @return the name
 	 */
-	@Column(name="STORE_NAME", nullable=false)
+	@Column(name = "STORE_NAME", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -67,7 +66,7 @@ public class Store {
 	/**
 	 * @return the storeLink
 	 */
-	@Column(name="STORE_WEBLINK")
+	@Column(name = "STORE_WEBLINK")
 	public String getStoreLink() {
 		return storeLink;
 	}
@@ -84,7 +83,7 @@ public class Store {
 	 */
 	@Id
 	@GeneratedValue
-	@Column(name="STORE_ID")
+	@Column(name = "STORE_ID")
 	public int getId() {
 		return storeId;
 	}
@@ -95,7 +94,5 @@ public class Store {
 	public void setId(int id) {
 		this.storeId = id;
 	}
-	
-	
 
 }

@@ -19,7 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import com.de.hibernate.businessobject.Product;
+import com.de.groceryplanner.dto.ProductDto;
 
 public class TestProduct {/*
 	
@@ -27,7 +27,7 @@ public class TestProduct {/*
 	
 	@Test
 	public void crud() {
-		 Product productObject;
+		 ProductDto productObject;
 		 Session sessionObj;
 		 SessionFactory sessionFactoryObj;
 
@@ -59,7 +59,7 @@ public class TestProduct {/*
 	
 	private void delete(Session session) {
 		System.out.println("Deleting mondeo record...");
-		Product mondeo = session.get(Product.class, "mondeo");
+		ProductDto mondeo = session.get(ProductDto.class, "mondeo");
 		
 		session.beginTransaction();
 		session.delete(mondeo);
@@ -68,7 +68,7 @@ public class TestProduct {/*
 	
 	private void update(Session session) {
 		System.out.println("Updating mustang NumberOfItems...");
-		Product product = session.get(Product.class, "mustang");
+		ProductDto product = session.get(ProductDto.class, "mustang");
 		product.setBarCode("Toothpaste");
 		product.setNumberOfItems(5);
 		
@@ -78,9 +78,9 @@ public class TestProduct {/*
 	}
 
 	private void create(Session session) {
-		System.out.println("Creating Product records...");
+		System.out.println("Creating ProductDto records...");
 		Object object=null;
-		Product product=null;
+		ProductDto product=null;
 		JSONParser parser= new JSONParser();
 		
 		try {
@@ -95,7 +95,7 @@ public class TestProduct {/*
 		JSONObject jsonObject = (JSONObject) object; 
 		 
 		
-		JSONArray productList = (JSONArray) jsonObject.get("Product");
+		JSONArray productList = (JSONArray) jsonObject.get("ProductDto");
 		 
 		
 		Iterator<JSONObject> iterator = productList.iterator();
@@ -103,7 +103,7 @@ public class TestProduct {/*
         while (iterator.hasNext()) {
         	JSONObject jsonProd=iterator.next();
             System.out.println();
-        	 product = new Product();
+        	 product = new ProductDto();
         	product.setBarCode((String)jsonProd.get(""));
         	product.setNumberOfItems(Integer.parseInt((String)jsonProd.get("numberofitems")));
         	
@@ -119,13 +119,13 @@ public class TestProduct {/*
 	private void read(Session session) {
 		
 		@SuppressWarnings("deprecation")
-		Query<Product> q = session.createQuery("select _Product from product _Product");
+		Query<ProductDto> q = session.createQuery("select _Product from product _Product");
 		
-		List<Product> Products = q.list();
+		List<ProductDto> Products = q.list();
 		
-		System.out.println("Reading Product records...");
+		System.out.println("Reading ProductDto records...");
 		System.out.printf("%-30.30s  %-30.30s%n", "BarCode", "NumberOfItems");
-		for (Product c : Products) {
+		for (ProductDto c : Products) {
 			System.out.printf("%-30.30s  %-30.30s%n", c.getBarCode(), c.getNumberOfItems());
 		}
 		
