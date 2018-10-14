@@ -25,7 +25,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
  
         <!-- Annotated entity classes -->
-        <mapping class="com.de.hibernate.businessobject.Product"/>
+        <mapping class="com.de.groceryplanner.dto.ProductDto"/>
+         <mapping class="com.de.groceryplanner.dto.StoreDto"/>
+         <mapping class="com.de.groceryplanner.dto.CategoryDto"/>
         
     </session-factory>
 </hibernate-configuration>

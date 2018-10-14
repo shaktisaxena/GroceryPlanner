@@ -10,6 +10,9 @@ import javax.persistence.Table;
 @Table(name="CATEGORY")
 public class CategoryDto {
 	
+public CategoryDto() {
+	// TODO Auto-generated constructor stub
+}
 	private String name;
 	
 	@Id

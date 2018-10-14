@@ -5,124 +5,148 @@ package com.de.groceryplanner.daoimpl;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import javax.enterprise.context.Dependent;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.de.groceryplanner.dao.ProductDao;
 import com.de.groceryplanner.dto.ProductDto;
-import com.de.hibernate.launcher.HibernateUtil;
 
 /**
  * @author Mandakini
  *
  */
+@Dependent
 public class ProductDaoImpl implements ProductDao {
 
-	private SessionFactory sessionFactory;
-
+	private EntityManager entityManager;
 	
-	/**
-	 * @param sessionFactory
-	 */
-	public ProductDaoImpl(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	public ProductDaoImpl() {
+		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the entityManager
+	 */
+	public EntityManager getSessionFactory() {
+		return entityManager;
+	}
+
+	/**
+	 * @param entityManager the entityManager to set
+	 */
+	public void setSessionFactory(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.de.groceryplanner.dao.ProductDao#findProductById(long)
 	 */
 	@Override
 	public ProductDto findProductById(long id) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction= null;
 		
-		
-		ProductDto product=null;
+		ProductDto product = null;
 		try {
-			transaction=session.beginTransaction();
-			
-			product = session.get(ProductDto.class,id);
-			transaction.commit();
+			entityManager.getTransaction().begin();
+
+			product = entityManager.find(ProductDto.class, id);
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			entityManager.getTransaction().rollback();
 		}
-		
+
 		return product;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.de.groceryplanner.dao.ProductDao#findProductByBarcode(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.de.groceryplanner.dao.ProductDao#findProductByBarcode(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public ProductDto findProductByBarcode(String barcode) {
+
 		
-		Session session = sessionFactory.openSession();
-		Transaction transaction= null;
-		
-		
-		ProductDto product=null;
+	
+
+		ProductDto product = null;
 		try {
-			transaction=session.beginTransaction();
-			
-			product = session.get(ProductDto.class,barcode);
-			transaction.commit();
+			entityManager.getTransaction().begin();
+
+
+			@SuppressWarnings("deprecation")
+			javax.persistence.Query q = entityManager.createNativeQuery(
+					"select _Product from ProductDto _Product where PRODUCT_BARCODE=" + "'" + barcode + "'");
+
+			product = (ProductDto) q.getSingleResult();
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			entityManager.getTransaction().rollback();
 		}
-		
+
 		return product;
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see com.de.groceryplanner.dao.ProductDao#updateProduct(com.de.groceryplanner.dto.ProductDto)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.de.groceryplanner.dao.ProductDao#updateProduct(com.de.groceryplanner.dto.
+	 * ProductDto)
 	 */
 	@Override
 	public void updateProduct(ProductDto product) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction= null;
-		
-		
 		
 		try {
-			transaction=session.beginTransaction();
-			
-			session.update(product); // update and forget
-			transaction.commit();
+			entityManager.getTransaction().begin();
+
+			entityManager.persist(product); // update and forget
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			entityManager.getTransaction().rollback();
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.de.groceryplanner.dao.ProductDao#deleteProduct(com.de.groceryplanner.dto.ProductDto)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.de.groceryplanner.dao.ProductDao#deleteProduct(com.de.groceryplanner.dto.
+	 * ProductDto)
 	 */
 	@Override
 	public void deleteProduct(ProductDto product) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction= null;
-		
-		
-		
+		/*Session session = entityManager.openSession();
+		Transaction transaction = null;
+
 		try {
-			transaction=session.beginTransaction();
-			
+			transaction = session.beginTransaction();
+
 			session.delete(product); // delete and forget
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
 		}
-
+*/
 	}
 
-	/* (non-Javadoc)
-	 * @see com.de.groceryplanner.dao.ProductDao#saveProduct(com.de.groceryplanner.dto.ProductDto)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.de.groceryplanner.dao.ProductDao#saveProduct(com.de.groceryplanner.dto.
+	 * ProductDto)
 	 */
 	@Override
 	public void saveProduct(ProductDto product) {
@@ -133,22 +157,20 @@ public class ProductDaoImpl implements ProductDao {
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<ProductDto> findAllProducts() {
-		Session session = sessionFactory.openSession();
-		Transaction transaction= null;
+		Query query=null;
 		
-		
-		List<ProductDto> productList=null;
 		try {
-			transaction=session.beginTransaction();
-			
-			productList = session.createCriteria(ProductDto.class).list();
-			transaction.commit();
+			entityManager.getTransaction().begin();
+
+
+	    query = entityManager.createQuery("SELECT e FROM Product e");
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			transaction.rollback();
+			entityManager.getTransaction().rollback();
 		}
-		
-		return productList;
+
+		 return (List<ProductDto>) query.getResultList();
 	}
 
 }

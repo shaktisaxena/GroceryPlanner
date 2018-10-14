@@ -28,7 +28,9 @@ public class ProductDto implements Serializable {
 
 	private CategoryDto productCategory;
 	
-	
+	public ProductDto() {
+		
+	}
 	
 
 	/**
@@ -138,6 +140,11 @@ public class ProductDto implements Serializable {
 		this.productId = productId;
 	}
 	
+	@Override
+	public String toString() {
+		
+		return String.format("Product id is %s, Product Name is %s", this.getProductId(),this.getName());
+	}
 	
 
 }

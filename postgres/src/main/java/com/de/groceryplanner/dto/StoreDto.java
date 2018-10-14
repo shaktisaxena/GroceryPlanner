@@ -12,6 +12,9 @@ import javax.persistence.Table;
 @Table(name = "STORE")
 public class StoreDto {
 
+	public StoreDto() {
+		// TODO Auto-generated constructor stub
+	}
 	private String name;
 
 	private StoreType storetype;
